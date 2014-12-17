@@ -8,7 +8,7 @@ end
 namespace :safe_deploy_to do
   task :create do
     on roles :all do
-      sudo :mkdir, '-pv', fetch(:safe_deploy_to_path)
+      execute :mkdir, '-pv', fetch(:safe_deploy_to_path)
     end
   end
 
@@ -19,7 +19,7 @@ namespace :safe_deploy_to do
         group = capture :id, '-gn'
         set :safe_deploy_to_owner, "#{user}:#{group}"
       end
-      sudo :chown, fetch(:safe_deploy_to_owner), fetch(:safe_deploy_to_path)
+      execute :chown, fetch(:safe_deploy_to_owner), fetch(:safe_deploy_to_path)
     end
   end
 
